@@ -9,14 +9,14 @@
     <a href="{% url 'login' %}">Log In</a>
     <br>
 
-    {% comment %} <div>
+    <div>
         <form action="" method="post">
             {% csrf_token %}
             
             {{form.as_p}}
 
-            <button type="submit">Create Account</button>
+            <button class="btn btn-primary" type="submit">Create Account</button>
         </form>
-    </div> {% endcomment %}
+    </div>
 
 {% endblock content %}
