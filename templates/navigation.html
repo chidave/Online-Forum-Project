@@ -28,8 +28,18 @@
         </li>
       </ul>
       {% if user.is_authenticated %}
-        <span class="mr-2">Welcome, <span>{{ user }}</span></span>
-        <span><a href="{% url 'logout' %}">Logout</a></span>
+        <span class="mr-2">Welcome, </span>
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user }}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a href="{% url 'profile' username=user %}" class="dropdown-item">Profile</a>
+                <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+            </div>
+        </div>
+        <!--<span><a href="{% url 'logout' %}">Logout</a></span>-->
       {% else %}
         <span class="mr-2"><a class="btn btn-outline-primary" href="{% url 'login' %}">Log In</a></span>
         <span><a class="btn" href="{% url 'signup' %}">Sign Up</a></span>

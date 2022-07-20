@@ -53,3 +53,11 @@ a:hover {
     border-color: #df8c96;
     transition: .3s;
 }
+
+.profile-main {
+    width: 60%;
+    margin: auto;
+    outline: 1px solid black;
+    /* -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+    box-shadow: 5px 5px 15px 5px #000000; */
+}

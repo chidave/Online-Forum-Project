@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -55,3 +55,11 @@ def logoutUser(request: HttpRequest):
         return redirect('index')
     logout(request)
     return redirect('login')
+
+
+def userProfile(request: HttpRequest, username):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    context = {}
+    return render(request, "users/profile.html", context)
