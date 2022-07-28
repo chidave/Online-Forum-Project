@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static "posts/styles.css" %}>
+{% endblock css %}
 
 {% block content %}
 
-    <h1>Welcome to the Forum!</h1>
-    {% if user.is_authenticated %}
-        <br>
-        <p>Currently logged in as {{ user }}</p>
-    {% endif %}
-    <br>
-    <a href="{% url 'signup' %}">Sign Up</a>
-    <br>
-    <a href="{% url 'login' %}">Log In</a>
-    <br>
-    <a href="{% url 'logout' %}">Logout</a>
+    <div class="posts-preview">
+        
+    </div>
 
 {% endblock content %}
