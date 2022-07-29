@@ -7,8 +7,26 @@
 
 {% block content %}
 
-    <div class="posts-preview">
-        
+    <div class="new-post mb-3">
+        <a class="new-post-btn" href={% url 'newPost' %}><i class="fa fa-plus fa-md"></i> New Post</a>
     </div>
+    <div class="row">
+        <div class="posts-preview p-4">
+            {% with ''|center:10 as range %}
+            {% for _ in range %}
+                <div class="post mb-3">
+
+                </div>
+            {% endfor %}
+            {% endwith %}
+            {% comment %} {% for num in range(10) %}
+                
+            {% endfor %} {% endcomment %}
+        </div>
+        <div class="sidebar">
+
+        </div>
+    </div>
+
 
 {% endblock content %}

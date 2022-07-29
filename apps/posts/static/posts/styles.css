@@ -1,6 +1,37 @@
 .posts-preview {
-    width: 60%;
+    width: 59%;
     margin-left: 10%;
-    height: 100px;
+    margin-right: 1%;
+    height: fit-content;
     background-color: green;
+}
+
+.sidebar {
+    width: 19%;
+    margin-right: 10%;
+    height: 100px;
+    background-color: blue;
+}
+
+.post {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+}
+
+.new-post {
+    margin-left: 9%;
+}
+
+.new-post-btn:link, .new-post-btn:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+.new-post-btn:hover, .new-post-btn:active {
+    background-color: red;
 }
