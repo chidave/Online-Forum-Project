@@ -12,17 +12,12 @@
     </div>
     <div class="row">
         <div class="posts-preview p-4">
-            <!--{% with ''|center:10 as range %}-->
             {% for post in posts %}
                 <div class="post mb-3 p-2 d-flex flex-column justify-content-between">
-                    <span><a href="https://google.com">{{ post.title }}</a></span>
+                    <span><a href={% url 'viewPost' postId=post.id %}>{{ post.title }}</a></span>
                     <span><p class="float-right">By {{ post.author }} on {{ post.created_on }}</p></span>
                 </div>
             {% endfor %}
-            <!--{% endwith %}-->
-            {% comment %} {% for num in range(10) %}
-                
-            {% endfor %} {% endcomment %}
         </div>
         <div class="sidebar">
 

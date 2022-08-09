@@ -35,3 +35,10 @@
 .new-post-btn:hover, .new-post-btn:active {
     background-color: red;
 }
+
+.main-post-container {
+    height: 1000px;
+    width: 70%;
+    margin: auto;
+    background-color: whitesmoke;
+}

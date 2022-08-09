@@ -94,3 +94,7 @@ a:hover {
 .uppercase {
     text-transform: uppercase;
 }
+
+.profile-title {
+    color: white;
+}

@@ -17,5 +17,16 @@ def index(request):
 
     return render(request, "posts/index.html", context)
 
+    
+@login_required(login_url='login')
 def newPost(request):
     return HttpResponse("Welcome to the new posts page!")
+
+
+def viewPost(request, postId):
+
+    post = Post.objects.get(pk=postId)
+    context = {'post': post}
+
+    return render(request, "posts/post.html", context)
+    # return HttpResponse(f'This is Post #{postId}')
