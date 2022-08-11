@@ -26,7 +26,7 @@ def newPost(request):
 def viewPost(request, postId):
 
     post = Post.objects.get(pk=postId)
-    context = {'post': post}
+    context = {'post': post, 'range': range(10)}
 
     return render(request, "posts/post.html", context)
     # return HttpResponse(f'This is Post #{postId}')

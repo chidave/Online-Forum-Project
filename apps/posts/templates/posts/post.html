@@ -9,7 +9,41 @@
 
     <div class="main-post-container p-4">
         <h2 class="">{{ post.title }}</h2>
+        <em>Posted by {{ post.author }} on {{ post.created_on }}</em>
+
+        <div class="my-4"></div>
+        <p>{{ post.content }}</p>
+        <div class="my-5"></div>
+
+        <div class="actions-div p-2 d-flex justify-content-between align-items-end">
+            <button class="btn btn-primary">Add Comment</button>
+            <div class="opinion-div">
+                <button class="opinion-btn btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> 0</button>
+                <button class="opinion-btn btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> 0</button>
+            </div>
+        </div>
+
+        <div class="comments-div mt-1 py-3">
+            {% for _ in range %}
+                <div class="comment">
+                    <div>
+                        <strong><u>Username1</u></strong>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod iure, atque aliquid inventore aut officiis nobis officia provident suscipit alias blanditiis? Ab, atque sapiente nisi sint adipisci dignissimos corporis illo omnis sunt.
+                    </div>
+                    <div>
+                        <div class="float-right small-text">
+                            <a href="">*Edit</a>
+                            <a href="">Agree</a>
+                            <a href="">Disagree</a>
+                        </div>
+                    </div>
+                </div><br><br>
+            {% endfor %}
+        </div>
     </div>
 
 
 {% endblock content %}
+
+{% block js %}
+    <script src={% static "posts/app.js" %}></script>
+{% endblock js %}

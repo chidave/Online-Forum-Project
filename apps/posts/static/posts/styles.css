@@ -37,8 +37,53 @@
 }
 
 .main-post-container {
-    height: 1000px;
+    height: fit-content;
     width: 70%;
     margin: auto;
     background-color: whitesmoke;
+}
+
+.actions-div {
+    /* border-top: 1px solid black; */
+    border-bottom: 1px solid black;
+}
+
+.opinion-div {
+    /* height: 40px;
+    width: 20%;
+    background-color: black; */
+    float: right;
+}
+
+.opinion-btn {
+    cursor: pointer;
+    outline: 0;
+    color: rgb(146, 136, 136);
+    background-color: #c0c7d1;
+}
+
+.opinion-btn:focus {
+    outline: none;
+}
+
+.green{
+    color: green;
+}
+  
+.red{
+    color: red;
+}
+
+.comment {
+    width: 100%;
+    height: 40px;
+    /* background-color: black; */
+}
+
+.float-right {
+    float: right;
+}
+
+.small-text {
+    font-size: small;
 }
