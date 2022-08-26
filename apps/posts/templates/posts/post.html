@@ -16,10 +16,15 @@
         <div class="my-5"></div>
 
         <div class="actions-div p-2 d-flex justify-content-between align-items-end">
-            <button class="btn btn-primary">Add Comment</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Comment</button>
             <div class="opinion-div">
-                <button class="opinion-btn btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> 0</button>
-                <button class="opinion-btn btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> 0</button>
+                {% if post.author != user %}
+                    <button class="opinion-btn btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> {{post.likes}}</button>
+                    <button class="opinion-btn btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> {{post.dislikes}}</button>
+                {% else %}
+                    <button class="btn" id="green" disabled><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> {{post.likes}}</button>
+                    <button class="btn" id="red" disabled><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> {{post.dislikes}}</button>
+                {% endif %}
             </div>
         </div>
 
@@ -38,6 +43,36 @@
                     </div>
                 </div><br><br>
             {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Write a Comment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{form.content}}
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </div>
+                </form>
+            </div>
+            <!--<div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+            </div>-->
+        </div>
         </div>
     </div>
 

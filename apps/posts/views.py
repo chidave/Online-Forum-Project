@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 
@@ -36,10 +36,20 @@ def newPost(request: HttpRequest):
     return render(request, "posts/newPost.html", context)
 
 
-def viewPost(request, postId):
-
+def viewPost(request: HttpRequest, postId):
+    form = CommentForm()
     post = Post.objects.get(pk=postId)
-    context = {'post': post, 'range': range(10)}
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid:
+            form = form.save(commit=False)
+            form.author = request.user
+            form.post = post
+            form.save()
+            form = CommentForm()
+
+    context = {'post': post, 'range': range(10), 'form': form}
 
     return render(request, "posts/post.html", context)
     # return HttpResponse(f'This is Post #{postId}')
