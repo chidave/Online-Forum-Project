@@ -14,7 +14,7 @@ class Post(models.Model):
     created_on=models.DateTimeField(auto_now_add=True)
     likes=models.IntegerField(default=0)
     dislikes=models.IntegerField(default=0)
-    #comments=(for when I implement comments)
+    #comments=models.Man
 
     def __str__(self):
         return self.title

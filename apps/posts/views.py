@@ -47,9 +47,12 @@ def viewPost(request: HttpRequest, postId):
             form.author = request.user
             form.post = post
             form.save()
-            form = CommentForm()
+            return redirect('viewPost', postId=postId)
 
-    context = {'post': post, 'range': range(10), 'form': form}
+    post_comments = post.comment_set.all()
+    # for comment in post_comments:
+    #     print(f'Comment Author: {comment.author}, Comment Post: {comment.post}')
+    context = {'post': post, 'post_comments': post_comments, 'range': range(10), 'form': form}
 
     return render(request, "posts/post.html", context)
     # return HttpResponse(f'This is Post #{postId}')

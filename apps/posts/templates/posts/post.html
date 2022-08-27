@@ -29,10 +29,10 @@
         </div>
 
         <div class="comments-div mt-1 py-3">
-            {% for _ in range %}
+            {% for comment in post_comments %}
                 <div class="comment">
                     <div>
-                        <strong><u>Username1</u></strong>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod iure, atque aliquid inventore aut officiis nobis officia provident suscipit alias blanditiis? Ab, atque sapiente nisi sint adipisci dignissimos corporis illo omnis sunt.
+                        <strong><u>{{comment.author}}</u></strong>&nbsp;&nbsp;&nbsp;&nbsp;{{comment.content}}
                     </div>
                     <div>
                         <div class="float-right small-text">
