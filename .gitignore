@@ -166,6 +166,8 @@ cython_debug/
 
 .DS_Store
 
+Football_Api_results.txt
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

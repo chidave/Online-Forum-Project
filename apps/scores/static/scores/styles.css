@@ -1,0 +1,11 @@
+.main-div {
+    width: 70%;
+    height: fit-content;
+    margin: auto;
+    background-color: whitesmoke;
+}
+
+.country-div {
+    height: fit-content;
+    background-color: rgb(136, 129, 129);
+}

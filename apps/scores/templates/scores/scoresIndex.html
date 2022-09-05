@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load dict_key %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static "scores/styles.css" %}>
+{% endblock css %}
+
+{% block content %}
+
+    <div class="main-div p-3 text-center">
+        <h2 class="text-center">Match Results</h2>
+        <!--<a href={% url 'getData' %} class="btn btn-primary">Get data</a>-->
+        <!--<h3>Test: {{ fixtures.England|dict_key:'Premier League' }}</h3>-->
+
+        <div class="m-4"></div>
+
+        {% for key, value in fixtures.items %}
+            <div class="m-3 pt-2 px-2 country-div">
+                <h3>{{ key }}</h3>
+                {% for key2, value2 in value.items %}
+                    <div class="league-div mb-2">
+                        <h5><u>{{ key2 }}</u></h5>
+                        <!--{{ value2 }}-->
+                        {% for fixture in value2 %}
+                            <div>{{ fixture }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
