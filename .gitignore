@@ -166,8 +166,8 @@ cython_debug/
 
 .DS_Store
 
-yesterday_cache/*
-today_cache/*
+yesterday_cache/*.txt
+today_cache/*.txt
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
