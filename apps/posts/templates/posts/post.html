@@ -16,7 +16,11 @@
         <div class="my-5"></div>
 
         <div class="actions-div p-2 d-flex justify-content-between align-items-end">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Comment</button>
+            {% if user.is_authenticated %}
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Comment</button>
+            {% else %}
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" disabled>Add Comment</button>
+            {% endif %}
             <div class="opinion-div">
                 {% if post.author != user %}
                     <button class="opinion-btn btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> {{post.likes}}</button>
