@@ -1,94 +1,79 @@
 from datetime import datetime
-import requests, json, sys
+import requests, json, sys, os
 from datetime import datetime, timedelta
 
 def get_data() -> dict:
-    return process_data()
+    yesterday = datetime.today() - timedelta(1)
+    yesterday_date = yesterday.isoformat("|").split("|")[0]
+    print(f"Yesterday's date: {yesterday_date}")
 
-    # yesterday = datetime.today() - timedelta(1)
-    # yesterday_date = yesterday.isoformat("|").split("|")[0]
-    # print(f"Yesterday's date: {yesterday_date}")
+    # create a file with yesterday's date
+    cache_filename = 'yesterday_cache/' + yesterday_date + '.txt'
+    data = ''
 
-    # url = "https://api-football-v1.p.rapidapi.com/v3/fixtures"
+    # so first check if there is already a cache file for the date 
+    # (in this case, yesterday's date)
+    if os.path.exists(cache_filename):
+        print("READ FROM CACHE!!!")
+        # use the data from here instead of pulling from the API
+        file_data = ''
+        with open(cache_filename) as f:
+            file_data = f.readlines()
+            data = file_data[0]
+    # else get the data from the api, then save to the cache
+    else:
+        print("READ FROM API!!!")
+        url = "https://api-football-v1.p.rapidapi.com/v3/fixtures"
+        querystring = {"date":yesterday_date}
+        headers = {
+            "X-RapidAPI-Key": "0d59535b05msh9f26363d6435b75p1a4bd3jsn6d5c86f7815d",
+            "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        data = response.text
 
-    # querystring = {"date":yesterday_date}
+        # now save the data to the cache file
+        original_stdout = sys.stdout
+        with open(cache_filename, 'w') as f:
+            sys.stdout = f
+            print(response.text)
+            sys.stdout = original_stdout
 
-    # headers = {
-    #     "X-RapidAPI-Key": "0d59535b05msh9f26363d6435b75p1a4bd3jsn6d5c86f7815d",
-    #     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
-    # }
-
-    # response = requests.request("GET", url, headers=headers, params=querystring)
-
-    # original_stdout = sys.stdout
-    # with open('Football_Api_Results.txt', 'w') as f:
-    #     sys.stdout = f
-    #     print(response.text)
-    #     sys.stdout = original_stdout
+    return process_data(data)
 
 
 # remember to pass in some data
-def process_data() -> dict:
-    file_data = ''
-    with open('Football_Api_Results.txt') as f:
-        file_data = f.readlines()
+def process_data(data) -> dict:
     
-    data = file_data[0]
     json_data = json.loads(data)
     response_data = json_data['response']
     england, spain, france, italy = [], [], [], []
-
-    # print(f'Type: {type(response_data)}')
-    # test_match = response_data[0]
 
     count = 0
     for response in response_data:
         count = count + 1
         teams = response['teams']
         league = response['league']
+        league_name = league['name']
+        home_team = teams['home']['name']
+        away_team = teams['away']['name']
+        home_goals = response['goals']['home']
+        away_goals = response['goals']['away']
+        final_score = {'League': league_name, home_team: home_goals, away_team: away_goals}
 
-        if league['country'] == 'England':
-            league_name = league['name']
-            home_team = teams['home']['name']
-            away_team = teams['away']['name']
-            home_goals = response['goals']['home']
-            away_goals = response['goals']['away']
-            final_score = {'League': league_name, home_team: home_goals, away_team: away_goals}
-            england.append(final_score)
-        elif league['country'] == 'Spain':
-            league_name = league['name']
-            home_team = teams['home']['name']
-            away_team = teams['away']['name']
-            home_goals = response['goals']['home']
-            away_goals = response['goals']['away']
-            final_score = {'League': league_name, home_team: home_goals, away_team: away_goals}
-            spain.append(final_score)
-        elif league['country'] == 'France':
-            league_name = league['name']
-            home_team = teams['home']['name']
-            away_team = teams['away']['name']
-            home_goals = response['goals']['home']
-            away_goals = response['goals']['away']
-            final_score = {'League': league_name, home_team: home_goals, away_team: away_goals}
-            france.append(final_score)
-        elif league['country'] == 'Italy':
-            league_name = league['name']
-            home_team = teams['home']['name']
-            away_team = teams['away']['name']
-            home_goals = response['goals']['home']
-            away_goals = response['goals']['away']
-            final_score = {'League': league_name, home_team: home_goals, away_team: away_goals}
-            italy.append(final_score)
-        else:
-            pass
-
-    # for score in spain:
-    #     print(score)
-
-    # print(f'Count: {count}')
-
-    # for fixture in organize_data(spain)['La Liga']:
-    #     print(fixture)
+        # print(f'Away goals: {away_goals}, Type: {type(away_goals)}')
+        # only take fixtures that have results
+        if home_goals != None and away_goals != None:
+            if league['country'] == 'England':
+                england.append(final_score)
+            elif league['country'] == 'Spain':
+                spain.append(final_score)
+            elif league['country'] == 'France':
+                france.append(final_score)
+            elif league['country'] == 'Italy':
+                italy.append(final_score)
+            else:
+                pass
 
     england_league_fixtures = organize_data(england)
     spain_league_fixtures = organize_data(spain)

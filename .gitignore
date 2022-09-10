@@ -166,7 +166,8 @@ cython_debug/
 
 .DS_Store
 
-Football_Api_results.txt
+yesterday_cache/*
+today_cache/*
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
