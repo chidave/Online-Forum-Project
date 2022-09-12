@@ -10,10 +10,29 @@
 
     <div class="main-div p-3 text-center">
         <h2 class="text-center">Match Fixtures</h2>
+        <h5>{{ date }}</h5>
 
         <div class="m-4"></div>
 
-        
+        {% for key, value in fixtures.items %}
+            <div class="m-3 pt-2 px-2 country-div">
+                <h3>{{ key }}</h3>
+                {% if value.items|length < 1 %}
+                    <div class="pb-2">
+                        No fixtures/results available for this country/region.
+                    </div>
+                {% endif %}
+                {% for key2, value2 in value.items %}
+                    <div class="league-div mb-2">
+                        <h5><u>{{ key2 }}</u></h5>
+                        {% for fixture in value2 %}
+                            <div>{{ fixture|safe }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock content %}
