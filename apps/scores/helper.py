@@ -133,7 +133,7 @@ def organize_data(data: list, date_code: int) -> dict:
                 else:
                     fixture_string = fixture_string + key2
             count = count + 1
-        print(fixture_string)
+        # print(fixture_string)
         league_fixtures.append(fixture_string)
 
     return league_dict
